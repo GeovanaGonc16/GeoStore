@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastrar Produto - GeoStore</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>🌿 GeoStore</h1>
+      </div>
+      <nav class="navbar">
+        <a href="../index.html" class="nav-link">Início</a>
+        <a href="cadastro.html" class="nav-link active">Cadastrar</a>
+        <a href="../produtos/produtos.html" class="nav-link">Produtos</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="form-container">
+      <h2>Cadastre um Novo Produto</h2>
+      <p class="form-subtitle">Preencha os campos abaixo com as informações do produto</p>
+
+      <form id="produtoForm" class="form">
+        <div class="form-group">
+          <label for="nome">Nome do Produto *</label>
+          <input type="text" id="nome" name="nome" required placeholder="Digite o nome do produto">
+        </div>
+
+        <div class="form-group">
+          <!-- email removed because DB has no email column -->
+        </div>
+
+        <div class="form-group">
+          <label for="preco">Preço (R$) *</label>
+          <input type="number" id="preco" name="preco" step="0.01" required placeholder="Digite o preço">
+        </div>
+
+        <div class="form-group">
+          <label for="categoria">Categoria *</label>
+          <select id="categoria" name="categoria" required>
+            <option value="">Selecione uma categoria</option>
+            <option value="Eletrônicos">Eletrônicos</option>
+            <option value="Livros">Livros</option>
+            <option value="Roupas">Roupas</option>
+            <option value="Alimentos">Alimentos</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao" placeholder="Digite uma descrição do produto" rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Cadastrar Produto</button>
+      </form>
+
+      <div id="mensagem" class="mensagem"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GeoStore. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="cadastro.js"></script>
+</body>
+</html>

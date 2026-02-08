@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos - GeoStore</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>🌿 GeoStore</h1>
+      </div>
+      <nav class="navbar">
+        <a href="index.html" class="nav-link">Início</a>
+        <a href="cadastro.html" class="nav-link">Cadastrar</a>
+        <a href="produtos.html" class="nav-link active">Produtos</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="produtos-header">
+      <h2>Nossos Produtos</h2>
+      <p>Explore nosso catálogo completo</p>
+    </section>
+
+    <section class="produtos-container" id="produtosGrid">
+      <div class="loading">Carregando produtos...</div>
+    </section>
+
+    <section class="empty-state" id="emptyState" style="display: none">
+      <div class="empty-icon">📭</div>
+      <h3>Nenhum produto cadastrado</h3>
+      <p>Seja o primeiro a cadastrar um produto</p>
+      <a href="cadastro.html" class="btn-card">Cadastrar Agora</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GeoStore. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="produtos.js"></script>
+</body>
+</html>
