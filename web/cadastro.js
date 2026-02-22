@@ -5,12 +5,11 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault()
 
   const nome = document.getElementById('nome').value.trim()
-  const email = document.getElementById('email').value.trim()
   const preco = document.getElementById('preco').value.trim()
   const categoria = document.getElementById('categoria').value.trim()
   const descricao = document.getElementById('descricao').value.trim()
 
-  if (!nome || !email || !preco || !categoria) {
+  if (!nome || !preco || !categoria) {
     mostrarMensagem('Por favor, preencha todos os campos obrigatórios', 'erro')
     return
   }
@@ -23,7 +22,6 @@ form.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify({
         name: nome,
-        email: email,
         price: parseFloat(preco),
         category: categoria,
         description: descricao

@@ -49,6 +49,32 @@ body.dark-mode .produto-card {
 
 .produto-header {
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* button for deleting a product */
+.delete-btn {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #e74c3c;
+  transition: color 0.2s;
+}
+
+.delete-btn:hover {
+  color: #c0392b;
+}
+
+body.dark-mode .delete-btn {
+  color: #ff6b6b;
+}
+
+body.dark-mode .delete-btn:hover {
+  color: #ff4c4c;
 }
 
 .produto-nome {

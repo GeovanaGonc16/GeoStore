@@ -24,13 +24,10 @@ async function carregarProdutos() {
             <div class="produto-header">
               <h3 class="produto-nome">${produto.name}</h3>
               <span class="produto-categoria">${produto.category}</span>
+              <button class="delete-btn" title="Apagar produto">🗑️</button>
             </div>
 
             <div class="produto-info">
-              <div class="produto-info-item">
-                <span class="produto-info-label">Email:</span>
-                <span>${produto.email}</span>
-              </div>
               <div class="produto-info-item">
                 <span class="produto-info-label">Categoria:</span>
                 <span>${produto.category}</span>
@@ -43,7 +40,30 @@ async function carregarProdutos() {
           </div>
         `
 
+        // attach delete handler after element is added to DOM
         produtosGrid.appendChild(card)
+
+        const deleteBtn = card.querySelector('.delete-btn')
+        if (deleteBtn) {
+          deleteBtn.addEventListener('click', async () => {
+            if (!confirm('Deseja realmente apagar este produto?')) return
+            try {
+              const resp = await fetch(`http://localhost:3000/produtos/${produto.id}`, {
+                method: 'DELETE'
+              })
+              const result = await resp.json()
+              if (resp.ok) {
+                alert(result.message || 'Produto deletado com sucesso')
+                carregarProdutos()
+              } else {
+                alert(result.message || 'Erro ao deletar produto')
+              }
+            } catch (err) {
+              console.error('Erro ao apagar produto:', err)
+              alert('Erro ao deletar produto')
+            }
+          })
+        }
       })
     } else {
       produtosGrid.innerHTML = ''

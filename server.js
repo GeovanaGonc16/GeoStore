@@ -56,7 +56,7 @@ app.get('/produtos', async (req, res) => {
   try {
     const connection = await pool.getConnection()
 
-    const query = 'SELECT name, price, category, description FROM produtos_geovana'
+    const query = 'SELECT id, name, price, category, description FROM produtos_geovana'
 
     const [products] = await connection.execute(query)
 
@@ -71,6 +71,46 @@ app.get('/produtos', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Erro ao buscar produtos',
+      error: error.message
+    })
+  }
+})
+
+// rota para deletar produto por id
+app.delete('/produtos/:id', async (req, res) => {
+  const { id } = req.params
+
+  if (!id) {
+    return res.status(400).json({
+      success: false,
+      message: 'ID do produto é obrigatório'
+    })
+  }
+
+  try {
+    const connection = await pool.getConnection()
+
+    const query = 'DELETE FROM produtos_geovana WHERE id = ?'
+    const [result] = await connection.execute(query, [id])
+
+    connection.release()
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Produto não encontrado'
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Produto deletado com sucesso'
+    })
+  } catch (error) {
+    console.error('Erro ao deletar produto:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao deletar produto',
       error: error.message
     })
   }
