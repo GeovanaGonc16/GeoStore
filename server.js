@@ -76,6 +76,94 @@ app.get('/produtos', async (req, res) => {
   }
 })
 
+// rota para buscar produto por id
+app.get('/produtos/:id', async (req, res) => {
+  const { id } = req.params
+
+  if (!id) {
+    return res.status(400).json({
+      success: false,
+      message: 'ID do produto é obrigatório'
+    })
+  }
+
+  try {
+    const connection = await pool.getConnection()
+
+    const query = 'SELECT id, name, price, category, description FROM produtos_geovana WHERE id = ?'
+    const [results] = await connection.execute(query, [id])
+
+    connection.release()
+
+    if (results.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Produto não encontrado'
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      data: results[0]
+    })
+  } catch (error) {
+    console.error('Erro ao buscar produto:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao buscar produto',
+      error: error.message
+    })
+  }
+})
+
+// rota para editar produto por id
+app.put('/produtos/:id', async (req, res) => {
+  const { id } = req.params
+  const { name, price, category, description } = req.body
+
+  if (!id) {
+    return res.status(400).json({
+      success: false,
+      message: 'ID do produto é obrigatório'
+    })
+  }
+
+  if (!name || !price || !category) {
+    return res.status(400).json({
+      success: false,
+      message: 'Nome, preço e categoria são obrigatórios'
+    })
+  }
+
+  try {
+    const connection = await pool.getConnection()
+
+    const query = 'UPDATE produtos_geovana SET name = ?, price = ?, category = ?, description = ? WHERE id = ?'
+    const [result] = await connection.execute(query, [name, price, category, description, id])
+
+    connection.release()
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Produto não encontrado'
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Produto editado com sucesso'
+    })
+  } catch (error) {
+    console.error('Erro ao editar produto:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao editar produto',
+      error: error.message
+    })
+  }
+})
+
 // rota para deletar produto por id
 app.delete('/produtos/:id', async (req, res) => {
   const { id } = req.params

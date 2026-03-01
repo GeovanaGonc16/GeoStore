@@ -24,6 +24,7 @@ async function carregarProdutos() {
             <div class="produto-header">
               <h3 class="produto-nome">${produto.name}</h3>
               <span class="produto-categoria">${produto.category}</span>
+              <button class="edit-btn" title="Editar produto">✏️</button>
               <button class="delete-btn" title="Apagar produto">🗑️</button>
             </div>
 
@@ -41,6 +42,14 @@ async function carregarProdutos() {
         `
 
         produtosGrid.appendChild(card)
+
+        const editBtn = card.querySelector('.edit-btn')
+        if (editBtn) {
+          editBtn.addEventListener('click', () => {
+            // Redireciona para página de edição com o ID do produto
+            window.location.href = `../cadastro/cadastro.html?edit=${produto.id}`
+          })
+        }
 
         const deleteBtn = card.querySelector('.delete-btn')
         if (deleteBtn) {

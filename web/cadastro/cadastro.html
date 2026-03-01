@@ -24,8 +24,8 @@
 
   <main>
     <section class="form-container">
-      <h2>Cadastre um Novo Produto</h2>
-      <p class="form-subtitle">Preencha os campos abaixo com as informações do produto</p>
+      <h2 id="formTitle">Cadastre um Novo Produto</h2>
+      <p class="form-subtitle" id="formSubtitle">Preencha os campos abaixo com as informações do produto</p>
 
       <form id="produtoForm" class="form">
         <div class="form-group">
@@ -59,7 +59,7 @@
           <textarea id="descricao" name="descricao" placeholder="Digite uma descrição do produto" rows="5"></textarea>
         </div>
 
-        <button type="submit" class="btn-submit">Cadastrar Produto</button>
+        <button type="submit" class="btn-submit" id="submitBtn">Cadastrar Produto</button>
       </form>
 
       <div id="mensagem" class="mensagem"></div>
